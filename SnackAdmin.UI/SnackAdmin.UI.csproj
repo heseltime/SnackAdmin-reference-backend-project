@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net7</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>true</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Dal.Common\Dal.Common.csproj" />
+		<ProjectReference Include="..\SnackAdmin.BusinessLogic\SnackAdmin.BusinessLogic.csproj" />
+		<ProjectReference Include="..\SnackAdmin.Dal.Ado\SnackAdmin.Dal.Ado.csproj" />
+		<ProjectReference Include="..\SnackAdmin.Dal.Interface\SnackAdmin.Dal.Interface.csproj" />
+		<ProjectReference Include="..\SnackAdmin.Domain\SnackAdmin.Domain.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="appsettings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+</Project>
