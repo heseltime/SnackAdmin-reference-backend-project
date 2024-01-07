@@ -1,6 +1,10 @@
 # SnackAdmin project based on snacks-bb-g1-heseltime-g1-ilk
 snacks-bb-g1-heseltime-g1-ilk created by GitHub Classroom, SWK5 project with documentation (this Readme) - Hagenberg Software Engineering project. Documentation in English for the most part, with some evaluation in German.
 
+## API Testing Checklist (for Using this Project as a Test-Backend)
+
+* For POST requests for orders: [webhook](https://webhook.site/) in DB (restaurant table) has to be current on the restaurant being tested, this times out.
+
 ## Part 1 (Ausbaustufe 1)
 
 **Development Process**: We use git locally and host on GitHub: Both project group members agree to review each other's code in pull requests to the main branch, from feature branches. We provide feedback in GitHub's Code Review functionality.
