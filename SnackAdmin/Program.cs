@@ -99,6 +99,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddSingleton<JwtTokenService>();
 
+// PATCH request
+//builder.Services.AddControllers().AddNewtonsoftJson();
+
 var app = builder.Build();
 
 // Swagger

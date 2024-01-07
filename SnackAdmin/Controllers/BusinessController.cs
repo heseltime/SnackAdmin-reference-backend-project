@@ -10,6 +10,8 @@ using SnackAdmin.Dtos;
 using SnackAdmin.StatusInfo;
 using SnackAdmin.Services;
 using YamlDotNet.Core.Tokens;
+using Azure;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace SnackAdmin.Controllers
 {
@@ -94,6 +96,82 @@ namespace SnackAdmin.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while updating the order.");
             }
         }
+
+        // PATCH method to update an order, esp. status
+        //[HttpPatch("orders/{orderId}")]
+        //public async Task<IActionResult> UpdateOrder(Guid orderId, [FromBody] JsonPatchDocument<OrderDto> patchDoc)
+        //{
+        //    if (patchDoc == null)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    var existingOrder = await _logic.GetOrderByIdAsync(orderId);
+        //    if (existingOrder == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    // Create a DTO from the existing order entity
+        //    OrderDto orderDto = _mapper.Map<OrderDto>(existingOrder);
+
+        //    // Apply the patch to the DTO
+        //    patchDoc.ApplyTo(orderDto, ModelState);
+
+        //    // Validate the changes
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    // Map the updated fields from the DTO back to the existing order entity
+        //    //_mapper.Map(orderDto, existingOrder);
+        //    _mapper.Map(orderDto, existingOrder);
+
+        //    // Update in the database 
+        //    var updateResult = await _logic.UpdateOrderAsync(existingOrder);
+
+        //    if (updateResult == 0)
+        //    {
+        //        return NoContent(); // 204 No Content typically returned when an update is successful
+        //    }
+        //    else
+        //    {
+        //        return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while updating the order.");
+        //    }
+        //}
+
+        // POST just for status
+        [HttpPost("orderStatusUpdate/{orderId}")]
+        public async Task<IActionResult> UpdateOrderStatus(Guid orderId, [FromBody] int newStatus)
+        {
+            if (newStatus == null || newStatus < 0 || newStatus > 4)
+            {
+                return BadRequest();
+            }
+
+            var existingOrder = await _logic.GetOrderByIdAsync(orderId);
+            if (existingOrder == null)
+            {
+                return NotFound();
+            }
+
+            // change status
+            existingOrder.Status = (DeliveryStatus)newStatus;
+
+            // Update in the database 
+            var updateResult = await _logic.UpdateOrderAsync(existingOrder);
+
+            if (updateResult == 0)
+            {
+                return NoContent(); // 204 No Content typically returned when an update is successful
+            }
+            else
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while updating the order.");
+            }
+        }
+
 
         // PUT method to update an order - With Token!
         [HttpPut("orderLink/{orderToken}")]
