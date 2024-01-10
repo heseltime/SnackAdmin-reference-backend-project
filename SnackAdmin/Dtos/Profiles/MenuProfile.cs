@@ -7,7 +7,7 @@ namespace SnackAdmin.Dtos.Profiles
     {
         public MenuProfile()
         {
-            CreateMap<Menu, MenuDto>();
+            CreateMap<Menu, MenuDto>().ReverseMap();
         }
     }
 }

@@ -132,6 +132,20 @@ namespace SnackAdmin.BusinessLogic
             }
         }
 
+        public async Task<int> AddMenuAsync(Menu menu)
+        {
+            int success = await _menuDao.InsertAsync(menu);
+
+            if (success > 0)
+            {
+                return (int)UpdateOrderFailureCode.Ok;
+            }
+            else
+            {
+                return (int)UpdateOrderFailureCode.Default;
+            }
+        }
+
         public async Task<int> DeleteMenuAsync(Menu menu)
         {
             bool success = await _menuDao.DeleteAsync(menu);

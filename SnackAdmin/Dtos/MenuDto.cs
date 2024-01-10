@@ -7,6 +7,7 @@ namespace SnackAdmin.Dtos
     public class MenuDto
     {
         public int Id { get; set; }
+        public int RestaurantId { get; set; } 
         public required string Category { get; set; }
         public required string ItemName { get; set; }
         public string Description { get; set; }

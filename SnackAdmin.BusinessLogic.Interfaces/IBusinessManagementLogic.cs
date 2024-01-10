@@ -18,6 +18,7 @@ namespace SnackAdmin.BusinessLogic.Interfaces
         Task<IEnumerable<Menu>> GetAllMenuItemsAsync(string restaurantName);
         Task<Menu> GetMenuByIdAsync(int id);
         Task<int> UpdateMenuAsync(Menu menu);
+        Task<int> AddMenuAsync(Menu menu);
         Task<int> DeleteMenuAsync(Menu menu);
 
         Task<IEnumerable<DeliveryCondition>> GetAllDeliveryConditionsAsync(string restaurantName);

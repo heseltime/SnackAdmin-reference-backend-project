@@ -263,6 +263,32 @@ namespace SnackAdmin.Controllers
             }
         }
 
+        // POST method to add a new menu
+        [HttpPost("menu")]
+        public async Task<IActionResult> AddMenu([FromBody] MenuDto menuDto)
+        {
+            if (menuDto == null)
+            {
+                return BadRequest();
+            }
+
+            // Create a new menu entity from the DTO
+            var newMenu = _mapper.Map<Menu>(menuDto);
+
+            // Add to the database
+            var addResult = await _logic.AddMenuAsync(newMenu);
+
+            if (addResult == 0)
+            {
+                return CreatedAtAction(nameof(GetMenu), new { menuId = newMenu.Id }, newMenu); // id not correct
+            }
+            else
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while adding the menu.");
+            }
+        }
+
+
         // DELETE method to delete a delivery condition
         [HttpDelete("menu/{menuId}")]
         public async Task<IActionResult> DeleteMenu(int menuId)
