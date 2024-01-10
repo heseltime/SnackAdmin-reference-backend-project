@@ -25,6 +25,7 @@ namespace SnackAdmin.BusinessLogic.Interfaces
 
         Task<DeliveryCondition> GetDeliveryConditionByIdAsync(int conditionId);
         Task<int> UpdateDeliveryConditionAsync(DeliveryCondition condition);
+        Task<int> AddDeliveryConditionAsync(DeliveryCondition deliveryCondition);
 
         Task<int> DeleteDeliveryConditionAsync(DeliveryCondition condition);
 

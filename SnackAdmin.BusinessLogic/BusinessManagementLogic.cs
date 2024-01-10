@@ -190,6 +190,20 @@ namespace SnackAdmin.BusinessLogic
             }
         }
 
+        public async Task<int> AddDeliveryConditionAsync(DeliveryCondition deliveryCondition)
+        {
+            int success = await _deliveryConditionDao.InsertAsync(deliveryCondition);
+
+            if (success > 0)
+            {
+                return (int)UpdateOrderFailureCode.Ok;
+            }
+            else
+            {
+                return (int)UpdateOrderFailureCode.Default;
+            }
+        }
+
         public async Task<int> DeleteDeliveryConditionAsync(DeliveryCondition condition)
         {
             bool success = await _deliveryConditionDao.DeleteAsync(condition);

@@ -375,6 +375,31 @@ namespace SnackAdmin.Controllers
             }
         }
 
+        // POST method to add a new del. condition
+        [HttpPost("conditions")]
+        public async Task<IActionResult> AddCondition([FromBody] DeliveryConditionDto conditionDto)
+        {
+            if (conditionDto == null)
+            {
+                return BadRequest();
+            }
+
+            // Create a new menu entity from the DTO
+            var newCondition = _mapper.Map<DeliveryCondition>(conditionDto);
+
+            // Add to the database
+            var addResult = await _logic.AddDeliveryConditionAsync(newCondition);
+
+            if (addResult == 0)
+            {
+                return CreatedAtAction(nameof(GetConditions), new { conditionId = newCondition.Id }, newCondition); // id not correct
+            }
+            else
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while adding the menu.");
+            }
+        }
+
         // DELETE method to delete a delivery condition
         [HttpDelete("conditions/{conditionId}")]
         public async Task<IActionResult> DeleteCondition(int conditionId)
